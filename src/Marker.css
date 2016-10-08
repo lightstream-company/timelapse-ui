@@ -1,0 +1,12 @@
+.map-marker{
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 5px;
+  background: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.2);
+  font-size: 7px;
+  font-family: monospace;
+  text-indent: 20px;
+}

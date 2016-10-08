@@ -8,6 +8,7 @@ class AnimatedCanvas extends Component {
   componentWillReceiveProps(props) {
 
     const {point, width} = props;
+    const height = Math.ceil(width / 2);
     const {lightsNumber} = this.props;
     if (!this.lights) {
       this.lights = [];
@@ -15,10 +16,12 @@ class AnimatedCanvas extends Component {
 
     if (!this.draw) {
       this.ctx = this.refs.canvas.getContext('2d');
-      this.draw = renderer(this.ctx);
+      this.draw = renderer(this.ctx, {
+        lineOpacity: 0.2
+      });
     }
 
-    this.ctx.clearRect(0, 0, width, width/2);
+    this.ctx.clearRect(0, 0, width, height);
 
     if (point) {
       const {lng, lat} = point;
@@ -38,7 +41,8 @@ class AnimatedCanvas extends Component {
   }
 
   render() {
-    const {width, height} = this.props;
+    const {width} = this.props;
+    const height = Math.ceil(width / 2);
     return <canvas ref="canvas" width={width} height={height}></canvas>;
   }
 }

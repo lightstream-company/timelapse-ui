@@ -1,18 +1,20 @@
 require('es6-promise').polyfill();
+import './index.css';
+
 import React from 'react';
 import _ from 'lodash';
 import raf from 'raf';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
+
 import App from './App.jsx';
-import './index.css';
+import { fetchPoints } from './api';
 import viewport from './Viewport/reducers';
-import geo from './Geo/reducers';
 import { viewportResized } from './Viewport/actions';
+import geo from './Geo/reducers';
 import { drawPoint } from './Geo/actions';
 
-import fetch from 'isomorphic-fetch';
 
 const reducers = combineReducers({
   viewport,
@@ -33,15 +35,14 @@ window.addEventListener('resize', _.debounce(dispatchResize, 250));
 
 //store.subscribe(() => console.log('NEW STATE', store.getState()));
 
-const url = 'https://www.tweetping.net/data/stream/f2e596ea/geo/-180,-85.05,180,85.05?size=10000&condensed=true';
-fetch(url).then((response) => response.json()).then((json) => {
-  function consume(i){
+fetchPoints().then((json) => {
+  function consume(i) {
     const point = json[i];
-    if(point){
+    if (point) {
       const [id, lng, lat] = point; // eslint-disable-line no-unused-vars
       store.dispatch(drawPoint(lng, lat));
-      raf(() => consume(i+1), 18);
-    }else{
+      raf(() => consume(i + 1), 18);
+    } else {
       raf(() => consume(0), 18);
     }
   }

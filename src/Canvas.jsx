@@ -11,18 +11,21 @@ class Canvas extends Component {
 
   componentWillReceiveProps(props) {
 
-    const {point, width, height} = props;
+    const {point, width} = props;
     const {imageNumber, lightsByImage} = this.props;
+    const height = Math.ceil(width / 2);
 
     if (!this.draw) {
       this.ctx = this.refs.canvas.getContext('2d');
-      this.draw = renderer(this.ctx);
+      this.draw = renderer(this.ctx, {
+        lineOpacity: 0.05
+      });
     }
 
     if (point) {
       const {lng, lat} = point;
       const {left, top} = project(lng, lat, width);
-      const light = createLightStructure(left, top);
+      const light = createLightStructure(Math.round(left), Math.round(top));
       this.draw(light);
 
       if (!this.count) {
@@ -44,7 +47,8 @@ class Canvas extends Component {
   }
 
   render() {
-    const {width, height, imageNumber} = this.props;
+    const {width, imageNumber} = this.props;
+    const height = Math.ceil(width / 2);
     const {base64} = this.state;
     const style = {
       display: 'block',
