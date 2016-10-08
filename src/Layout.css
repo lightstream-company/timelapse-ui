@@ -1,0 +1,23 @@
+.Layout{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.Layout .content{
+  position: absolute;
+  left: 0;
+  background: url(./world-map-black.png) no-repeat; 
+  background-size: cover;
+}
+
+.Layout .bottom{
+  background: #000;  
+  position: absolute;
+}
+
+.Layout canvas{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
