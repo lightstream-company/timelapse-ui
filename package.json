@@ -2,6 +2,7 @@
   "name": "timelapse",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "devDependencies": {
     "react-scripts": "0.6.1",
     "react-test-renderer": "^15.3.2"
