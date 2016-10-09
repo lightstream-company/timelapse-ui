@@ -1,5 +1,4 @@
 import React from 'react';
-import './world-map-black.png';
 import './Layout.css';
 
 export default function Layout(props) {
@@ -14,6 +13,7 @@ export default function Layout(props) {
     top: marge,
     left: 0,
     width,
+    backgroundImage: 'url(./world-map-black.png)',
     height: width / 2
   };
   const bottom = {

@@ -7,8 +7,8 @@
 .Layout .content{
   position: absolute;
   left: 0;
-  background: url(./world-map-black.png) no-repeat; 
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .Layout .bottom{
