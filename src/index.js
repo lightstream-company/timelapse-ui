@@ -34,7 +34,9 @@ dispatchResize();
 window.addEventListener('resize', _.debounce(dispatchResize, 250));
 
 //store.subscribe(() => console.log('NEW STATE', store.getState()));
+//
 
+//const timer = 10000 / 15 / 60;
 fetchPoints().then((json) => {
   function consume(i) {
     const point = json[i];
@@ -42,6 +44,7 @@ fetchPoints().then((json) => {
       const [id, lng, lat] = point; // eslint-disable-line no-unused-vars
       store.dispatch(drawPoint(lng, lat));
       raf(() => consume(i + 1), 18);
+      //setTimeout(() => consume(i + 1), timer);
     } else {
       raf(() => consume(0), 18);
     }

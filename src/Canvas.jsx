@@ -6,7 +6,7 @@ class Canvas extends Component {
 
 
   state = {
-    base64: []
+    imgs: []
   };
 
   componentWillReceiveProps(props) {
@@ -34,10 +34,10 @@ class Canvas extends Component {
       this.count++;
       if (this.count % lightsByImage === 0) {
         this.setState({
-          base64: [
-            this.refs.canvas.toDataURL('image/png', 1),
-            ...this.state.base64.slice(0, imageNumber)
-          ]
+          imgs: [{
+            key: `${this.count - lightsByImage}-${this.count}`,
+            base64: this.refs.canvas.toDataURL('image/png', 1)
+          }, ...this.state.imgs.slice(0, imageNumber)]
         });
         this.ctx.clearRect(0, 0, width, height);
       }
@@ -49,21 +49,24 @@ class Canvas extends Component {
   render() {
     const {width, imageNumber} = this.props;
     const height = Math.ceil(width / 2);
-    const {base64} = this.state;
+    const {imgs} = this.state;
     const style = {
       display: 'block',
       position: 'absolute',
       top: 0,
       left: 0,
+      transition: 'opacity 1s',
       width,
       height
     };
     return <div style={style}>
-      {base64.map((src, i) => {
+      {imgs.map((img, i) => {
+        const {base64, key} = img;
+        const opacity = (imageNumber - i) / imageNumber;
         const s = Object.assign({}, style, {
-          opacity: (imageNumber - i) / imageNumber
+          opacity
         });
-        return <img src={src} width={width} height={height} alt="" style={s} key={i} />;
+        return <img src={base64} width={width} height={height} alt="" style={s} key={key} />;
       })}
       <canvas ref="canvas" width={width} height={height}></canvas>
     </div>;
