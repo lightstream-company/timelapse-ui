@@ -10,6 +10,8 @@ import { Provider } from 'react-redux';
 
 import App from './App.jsx';
 import { fetchPoints } from './api';
+import options from './options/reducers';
+import { loadOptionsFromEnv } from './options/actions';
 import viewport from './Viewport/reducers';
 import { viewportResized } from './Viewport/actions';
 import geo from './Geo/reducers';
@@ -17,10 +19,10 @@ import { drawPoint } from './Geo/actions';
 
 
 const reducers = combineReducers({
+  options,
   viewport,
   geo
 });
-
 
 const store = createStore(reducers,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -33,8 +35,9 @@ function dispatchResize() {
 dispatchResize();
 window.addEventListener('resize', _.debounce(dispatchResize, 250));
 
+store.dispatch(loadOptionsFromEnv(window));
+
 //store.subscribe(() => console.log('NEW STATE', store.getState()));
-//
 
 //const timer = 10000 / 15 / 60;
 fetchPoints().then((json) => {

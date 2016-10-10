@@ -3,7 +3,7 @@ import Canvas from './Canvas.jsx';
 import renderer from 'react-test-renderer';
 
 
-function RequireCtx(props){
+function TestIfContextIsPassed(props){
   if(!props.context){
     //TODO: uncoment me
     //context should exist
@@ -16,10 +16,9 @@ function RequireCtx(props){
 it('should render with context', () => {
 
   const component = renderer.create(<Canvas>
-    <RequireCtx />
+    <TestIfContextIsPassed />
   </Canvas>);
 
-  let tree = component.toJSON();
-  console.log(tree);
+  component.toJSON();
 
 });

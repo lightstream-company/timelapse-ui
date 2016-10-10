@@ -7,15 +7,16 @@ class Canvas extends Component {
       //context: this.refs.canvas.getContext('2d')
     };
   }
+
   render() {
-    const {children} = this.props;
+    const children = this.context ? this.props.children : [];
     return <canvas ref="canvas">
       {children}
     </canvas>;
   }
 }
 
-Canvas.childContextTypes =  {
+Canvas.childContextTypes = {
   context: PropTypes.any
 };
 
