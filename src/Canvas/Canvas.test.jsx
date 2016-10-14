@@ -3,11 +3,9 @@ import Canvas from './Canvas.jsx';
 import renderer from 'react-test-renderer';
 
 
-function TestIfContextIsPassed(props){
-  if(!props.context){
-    //TODO: uncoment me
-    //context should exist
-    //throw new Error('context not found');
+function TestIfContextIsPassed(props) {
+  if(typeof props.getContext !== 'function'){
+    throw new Error('getContext missing in props');
   }
   return <span></span>;
 }
@@ -15,10 +13,8 @@ function TestIfContextIsPassed(props){
 
 it('should render with context', () => {
 
-  const component = renderer.create(<Canvas>
+  renderer.create(<Canvas>
     <TestIfContextIsPassed />
   </Canvas>);
-
-  component.toJSON();
 
 });

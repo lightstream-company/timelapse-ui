@@ -1,23 +1,21 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 class Canvas extends Component {
 
-  getChildContext() {
-    return {
-      //context: this.refs.canvas.getContext('2d')
-    };
-  }
-
   render() {
-    const children = this.context ? this.props.children : [];
     return <canvas ref="canvas">
-      {children}
+      {React.Children.map(this.props.children, (child) => {
+        return React.cloneElement(child, {
+          getContext: () => {
+            if(this.refs.canvas){
+              return this.refs.canvas.getContext('2d');
+            }
+          }
+        });
+      })}
     </canvas>;
   }
 }
 
-Canvas.childContextTypes = {
-  context: PropTypes.any
-};
 
 export default Canvas;
