@@ -9,7 +9,7 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
 import App from './App.jsx';
-import { fetchPoints } from './api';
+import { fetchHilti as fetchPoints } from './api';
 import options from './options/reducers';
 import { loadOptionsFromEnv } from './options/actions';
 import viewport from './Viewport/reducers';
@@ -39,21 +39,26 @@ store.dispatch(loadOptionsFromEnv(window));
 
 //store.subscribe(() => console.log('NEW STATE', store.getState()));
 
-//const timer = 10000 / 15 / 60;
-fetchPoints().then((json) => {
-  function consume(i) {
-    const point = json[i];
-    if (point) {
-      const [id, lng, lat] = point; // eslint-disable-line no-unused-vars
-      store.dispatch(drawPoint(lng, lat));
-      raf(() => consume(i + 1), 18);
-      //setTimeout(() => consume(i + 1), timer);
-    } else {
-      raf(() => consume(0), 18);
+function streamArray(array) {
+  //const timer = Math.round((15 * 60 * 1000) / array.length);
+  return new Promise(resolve => {
+    function consume(i) {
+      const point = array[i];
+      if (point) {
+        const [id, lng, lat] = point; // eslint-disable-line no-unused-vars
+        store.dispatch(drawPoint(lng, lat));
+        raf(() => consume(i + 1), 18);
+        //setTimeout(() => consume(i + 1), 90);
+      } else {
+        resolve();
+        raf(() => consume(0), 18);
+      }
     }
-  }
-  consume(0);
-});
+    consume(0);
+  });
+}
+
+fetchPoints().then(streamArray);
 
 ReactDOM.render(
   <Provider store={store}>
