@@ -17,6 +17,7 @@ import { viewportResized } from './Viewport/actions';
 import geo from './Geo/reducers';
 import { drawPoint } from './Geo/actions';
 import hilti from './Hilti/reducers';
+import { setHiltiCounter } from './Hilti/actions';
 
 
 const reducers = combineReducers({
@@ -38,6 +39,10 @@ dispatchResize();
 window.addEventListener('resize', _.debounce(dispatchResize, 250));
 
 store.dispatch(loadOptionsFromEnv(window));
+
+setInterval(() => store.dispatch(setHiltiCounter({
+  globalCount: Math.random() * 10000000
+})), 400);
 
 //store.subscribe(() => console.log('NEW STATE', store.getState()));
 
