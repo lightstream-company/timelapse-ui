@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from './LayoutContainer';
 import Canvas from './CanvasContainer';
 import Marker from './MarkerContainer';
-import Hilti from './Hilti.jsx';
+import Hilti from './HiltiContainer';
 import AnimatedCanvas from './AnimatedCanvasContainer';
 
 export default function App(){

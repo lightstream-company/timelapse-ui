@@ -16,12 +16,14 @@ import viewport from './Viewport/reducers';
 import { viewportResized } from './Viewport/actions';
 import geo from './Geo/reducers';
 import { drawPoint } from './Geo/actions';
+import hilti from './Hilti/reducers';
 
 
 const reducers = combineReducers({
   options,
   viewport,
-  geo
+  geo,
+  hilti
 });
 
 const store = createStore(reducers,
