@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { renderer, createLightStructure, updateLightStructure } from 'tweetping-light-drawer';
 import { project } from 'equirectangular-projection';
 
-class AnimatedCanvas extends Component {
 
+class AnimatedCanvas extends Component {
 
   componentWillReceiveProps(props) {
 
@@ -26,16 +27,20 @@ class AnimatedCanvas extends Component {
     if (point) {
       const {lng, lat} = point;
       const {left, top} = project(lng, lat, width);
-      const light = createLightStructure(left, top);
+      const light = createLightStructure(left, top, 7);
 
 
       this.lights.push(light);
       if (this.lights.length > lightsNumber) {
         this.lights.shift();
       }
-      this.lights.forEach(light => {
+      const size = this.lights.length;
+      this.lights.forEach((light, i) => {
         updateLightStructure(light);
-        this.draw(light);
+        const opacity = _.round(i/size, 2);
+        //console.log(opacity);
+        //debugger;
+        this.draw(light, opacity);
       });
     }
   }
