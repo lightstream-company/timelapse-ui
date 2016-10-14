@@ -7,11 +7,11 @@ import AnimatedCanvas from './AnimatedCanvasContainer';
 
 export default function App(){
   return <div>
-    <Layout>
-      <Hilti />
+    <Layout background="#867c6b">
       <Canvas imageNumber={5} lightsByImage={1000} />
       <AnimatedCanvas lightsNumber={20} />
       <Marker />
+      <Hilti />
     </Layout>
   </div>;
 }

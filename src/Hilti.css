@@ -1,0 +1,57 @@
+.hilti{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+
+.hilti h1{
+  position: absolute;
+  top: 0%;
+  left: 3%;
+}
+
+.orders{
+  position: absolute;
+  bottom: 20%;
+  left: 3%;
+}
+
+.buttons{
+  padding: 50px 0;
+}
+
+.buttons a{
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,0.4);
+  padding: 18px 20px;
+  margin: 0 24px;
+  width: 210px;
+  color: white;
+  text-decoration: none;
+  transition: border 0.2s;
+}
+
+.buttons a:hover{
+  border-color: #fff;
+}
+
+.chf-count{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 50%;
+  height: 270px; 
+  margin-top: -135px;
+  text-align: center;
+}
+
+.chf-count .main-count{
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  font-size: 65px;
+  padding: 5px 20px;
+}
+
