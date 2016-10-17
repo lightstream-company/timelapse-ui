@@ -1,7 +1,7 @@
 import React from 'react';
 
 function isNumber(value) {
-  return isNaN(parseInt(value));
+  return isNaN(parseInt(value, 10));
 }
 
 export default function Monospacer({text, width, filter}) {

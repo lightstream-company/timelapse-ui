@@ -40,19 +40,26 @@ window.addEventListener('resize', _.debounce(dispatchResize, 250));
 
 store.dispatch(loadOptionsFromEnv(window));
 
-setInterval(() => store.dispatch(setHiltiCounter({
-  globalCount: Math.random() * 10000000
-})), 400);
-
 //store.subscribe(() => console.log('NEW STATE', store.getState()));
 
+
+const ONE_DAY = 1000 * 60 * 60 * 24;
 
 
 function streamArray(json) {
 
-  const {StartValue, SalesAmount, OrderValue, OrderAmount/*, Duration*/} = json;
+  const {StartValue, SalesAmount, OrderValue, OrderAmount /*, Duration */ } = json;
   const array = hiltiMapper(json);
-  //const timer = Math.round((15 * 60 * 1000) / array.length);
+
+  function dispatchValues(coef){
+    const currentOrderAmmount = Math.round(OrderAmount * coef);
+    store.dispatch(setHiltiCounter({
+      globalCount: StartValue + Math.round(SalesAmount * coef),
+      dailyOrder: currentOrderAmmount,
+      annualOrder: OrderValue + currentOrderAmmount
+    }));
+  }
+
   return new Promise(resolve => {
     function consume(i) {
       const point = array[i];
@@ -63,15 +70,10 @@ function streamArray(json) {
         } else {
           console.error(id, 'bad coordinates', lat, lng);
         }
-
-        const coef = i/array.length;
-        const currentOrderAmmount = Math.round(OrderAmount * coef);
-
-        store.dispatch(setHiltiCounter({
-          globalCount: StartValue + Math.round(SalesAmount * coef),
-          dailyOrder: currentOrderAmmount,
-          annualOrder: OrderValue + currentOrderAmmount
-        }));
+        const now = Date.now();
+        const msToday = now % ONE_DAY;
+        const coef = msToday / ONE_DAY;
+        dispatchValues(coef);
         raf(() => consume(i + 1), 18);
       //setTimeout(() => consume(i + 1), 90);
       } else {
