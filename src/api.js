@@ -19,5 +19,6 @@ export function fetchPoints() {
 }
 
 export function fetchHilti(){
-  return fetchJSON('./billion.json').then(hiltiMapper);
+  const url = 'http://billion.hilti.paulschwarz.me/billion.json';
+  return fetchJSON(url).then(hiltiMapper);
 }

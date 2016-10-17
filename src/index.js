@@ -53,7 +53,11 @@ function streamArray(array) {
       const point = array[i];
       if (point) {
         const [id, lng, lat] = point; // eslint-disable-line no-unused-vars
-        store.dispatch(drawPoint(lng, lat));
+        if(typeof lng === 'number' && typeof lat === 'number'){
+          store.dispatch(drawPoint(lng, lat));
+        }else{
+          console.error(id, 'bad coordinates', lat, lng);
+        }
         raf(() => consume(i + 1), 18);
         //setTimeout(() => consume(i + 1), 90);
       } else {
