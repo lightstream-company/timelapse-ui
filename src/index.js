@@ -9,7 +9,7 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
 import App from './App.jsx';
-import { fetchHilti as fetchPoints } from './api';
+import { fetchHilti as fetchPoints, hiltiMapper } from './api';
 import options from './options/reducers';
 import { loadOptionsFromEnv } from './options/actions';
 import viewport from './Viewport/reducers';
@@ -46,20 +46,34 @@ setInterval(() => store.dispatch(setHiltiCounter({
 
 //store.subscribe(() => console.log('NEW STATE', store.getState()));
 
-function streamArray(array) {
+
+
+function streamArray(json) {
+
+  const {StartValue, SalesAmount, OrderValue, OrderAmount/*, Duration*/} = json;
+  const array = hiltiMapper(json);
   //const timer = Math.round((15 * 60 * 1000) / array.length);
   return new Promise(resolve => {
     function consume(i) {
       const point = array[i];
       if (point) {
         const [id, lng, lat] = point; // eslint-disable-line no-unused-vars
-        if(typeof lng === 'number' && typeof lat === 'number'){
+        if (typeof lng === 'number' && typeof lat === 'number') {
           store.dispatch(drawPoint(lng, lat));
-        }else{
+        } else {
           console.error(id, 'bad coordinates', lat, lng);
         }
+
+        const coef = i/array.length;
+        const currentOrderAmmount = Math.round(OrderAmount * coef);
+
+        store.dispatch(setHiltiCounter({
+          globalCount: StartValue + Math.round(SalesAmount * coef),
+          dailyOrder: currentOrderAmmount,
+          annualOrder: OrderValue + currentOrderAmmount
+        }));
         raf(() => consume(i + 1), 18);
-        //setTimeout(() => consume(i + 1), 90);
+      //setTimeout(() => consume(i + 1), 90);
       } else {
         resolve();
         raf(() => consume(0), 18);

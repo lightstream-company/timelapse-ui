@@ -4,7 +4,7 @@ import './Hilti.css';
 export default function Hilti(props){
   const {globalCount, dailyOrder, annualOrder} = props;
   return <div className="hilti">
-    <h1>Hilti</h1>
+    <h1><img src="./logo.png" alt="Hilti" /></h1>
     <div className="chf-count">
       <div className="main-count">{globalCount} CHF</div>
       <div className="buttons">

@@ -9,7 +9,7 @@ function fetchJSON(url){
 }
 
 
-function hiltiMapper(json) {
+export function hiltiMapper(json) {
   return json.Sales.map((item) => [item.City, item.Lat, item.Long]);
 }
 
@@ -19,6 +19,7 @@ export function fetchPoints() {
 }
 
 export function fetchHilti(){
-  const url = 'http://billion.hilti.paulschwarz.me/billion.json';
-  return fetchJSON(url).then(hiltiMapper);
+  //const url = 'http://billion.hilti.paulschwarz.me/billion.json';
+  const url = './billion.json';
+  return fetchJSON(url);
 }
