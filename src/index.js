@@ -48,10 +48,10 @@ const ONE_DAY = 1000 * 60 * 60 * 24;
 
 function streamArray(json) {
 
-  const {StartValue, SalesAmount, OrderValue, OrderAmount /*, Duration */ } = json;
+  const {StartValue, SalesAmount, OrderValue, OrderAmount} = json;
   const array = hiltiMapper(json);
 
-  function dispatchValues(coef){
+  function dispatchValues(coef) {
     const currentOrderAmmount = Math.round(OrderAmount * coef);
     store.dispatch(setHiltiCounter({
       globalCount: StartValue + Math.round(SalesAmount * coef),
@@ -60,7 +60,20 @@ function streamArray(json) {
     }));
   }
 
+ //const animationTime = Math.round(json.Duration * 1000 / array.length);
+ const animationTime = Math.round(1000 / 26);
+
   return new Promise(resolve => {
+    function nextFrame(i) {
+      const before = Date.now();
+      raf(() => {
+        const delta = before - Date.now();
+        setTimeout(() => {
+          consume(i);
+        }, Math.max(1, animationTime - delta));
+      });
+    }
+
     function consume(i) {
       const point = array[i];
       if (point) {
@@ -74,11 +87,11 @@ function streamArray(json) {
         const msToday = now % ONE_DAY;
         const coef = msToday / ONE_DAY;
         dispatchValues(coef);
-        raf(() => consume(i + 1), 18);
+        nextFrame(i + 1);
       //setTimeout(() => consume(i + 1), 90);
       } else {
         resolve();
-        raf(() => consume(0), 18);
+        nextFrame(0);
       }
     }
     consume(0);
