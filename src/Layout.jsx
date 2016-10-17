@@ -3,7 +3,7 @@ import color from 'color';
 import './Layout.css';
 
 export default function Layout(props) {
-  const {width, height, children, background} = props;
+  const {width, height, children, background, referenceWidth} = props;
   const bgcolor = background || 'rgb(42, 88, 96)';
   const formattedBackground = /[0-9]{6,}/.test(bgcolor) ? '#' + bgcolor : bgcolor;
   const centerColor = color(formattedBackground).rgbString();
@@ -21,6 +21,9 @@ export default function Layout(props) {
     backgroundImage: 'url(./world-map-black.png)',
     height: width / 2
   };
+  if(referenceWidth){
+    content.fontSize = width / referenceWidth * 10;
+  }
   const bottom = {
     bottom: 0,
     left: 0,

@@ -7,7 +7,7 @@ import AnimatedCanvas from './AnimatedCanvasContainer';
 
 export default function App(){
   return <div>
-    <Layout background="#867c6b">
+    <Layout background="#867c6b" referenceWidth={1557}>
       <Canvas imageNumber={5} lightsByImage={1000} />
       <AnimatedCanvas lightsNumber={20} />
       <Marker />

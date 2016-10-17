@@ -18,19 +18,21 @@
   bottom: 20%;
   left: 3%;
   line-height: 1.5em;
+  font-size: 3.4em;
   font-weight: bold;
 }
 
 .buttons{
-  padding: 50px 0;
+  padding: 5em 0;
 }
 
 .buttons a{
   display: inline-block;
+  font-size: 3.1em;
   border: 1px solid rgba(255,255,255,0.4);
-  padding: 18px 20px;
-  margin: 0 24px;
-  width: 210px;
+  padding: 0.6em 0.7em;
+  margin: 0 0.8em;
+  width: 7em;
   color: white;
   text-decoration: none;
   transition: all 250ms;
@@ -47,15 +49,15 @@
   left: 0;
   width: 100%;
   top: 51%;
-  height: 270px; 
-  margin-top: -135px;
+  height: 2.7em; 
+  margin-top: -13.5em;
   text-align: center;
 }
 
 .chf-count .main-count{
   display: inline-block;
   background: rgba(255,255,255,0.2);
-  font-size: 65px;
-  padding: 15px 20px;
+  font-size: 10.8em;
+  padding: 0.15em 0.4em;
 }
 
