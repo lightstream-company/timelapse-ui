@@ -1,0 +1,14 @@
+
+nginx:
+  ports:
+    - 80:80/tcp
+  image: nginx
+  volumes:
+    - "./nginx.conf:/etc/nginx/conf.d/hilti.conf"
+  volumes_from:
+    - timelapse
+    
+timelapse:
+  image: tweetping/timelapse-ui:hilti
+  volumes:
+  - /ls-ui/
