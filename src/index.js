@@ -61,16 +61,12 @@ function streamArray(json) {
   }
 
  //const animationTime = Math.round(json.Duration * 1000 / array.length);
- const animationTime = Math.round(1000 / 26);
+ //const animationTime = Math.round(1000 / 26);
 
   return new Promise(resolve => {
     function nextFrame(i) {
-      const before = Date.now();
       raf(() => {
-        const delta = before - Date.now();
-        setTimeout(() => {
-          consume(i);
-        }, Math.max(1, animationTime - delta));
+        consume(i);
       });
     }
 
