@@ -9,7 +9,7 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
 import App from './App.jsx';
-import { fetchHilti as fetchPoints, hiltiMapper } from './api';
+import { fetchPoints, hiltiMapper } from './Hilti/api';
 import options from './options/reducers';
 import { loadOptionsFromEnv } from './options/actions';
 import viewport from './Viewport/reducers';

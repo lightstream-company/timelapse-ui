@@ -4,13 +4,8 @@ const hostname = document.location.hostname.indexOf('tweetping') > -1 ? document
 const streamId = document.location.hash.replace('#', '');
 
 
-function fetchJSON(url){
+export function fetchJSON(url){
   return fetch(url).then((response) => response.json());
-}
-
-
-export function hiltiMapper(json) {
-  return json.Sales.map((item) => [item.City, item.Lat, item.Long]);
 }
 
 export function fetchPoints() {
@@ -18,8 +13,3 @@ export function fetchPoints() {
   return fetchJSON(url);
 }
 
-export function fetchHilti(){
-  //const url = 'http://billion.hilti.paulschwarz.me/billion.json';
-  const url = './billion.json';
-  return fetchJSON(url);
-}
