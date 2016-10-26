@@ -48,7 +48,7 @@ const ONE_DAY = 1000 * 60 * 60 * 24;
 
 function streamArray(json) {
 
-  const {StartValue, SalesAmount, OrderValue, OrderAmount} = json;
+  const {StartValue, SalesAmount, OrderValue, OrderAmount, StartDate} = json;
   const array = hiltiMapper(json);
 
   function dispatchValues(coef) {
@@ -60,9 +60,7 @@ function streamArray(json) {
     }));
   }
 
- //const animationTime = Math.round(json.Duration * 1000 / array.length);
- //const animationTime = Math.round(1000 / 26);
-
+  const start = new Date(StartDate || '2016-10-25T00:00:00Z').getTime();
   return new Promise(resolve => {
     function nextFrame(i) {
       raf(() => {
@@ -80,11 +78,9 @@ function streamArray(json) {
           console.error(id, 'bad coordinates', lat, lng);
         }
         const now = Date.now();
-        const msToday = now % ONE_DAY;
-        const coef = msToday / ONE_DAY;
+        const coef = (now - start) / ONE_DAY;
         dispatchValues(coef);
         nextFrame(i + 1);
-      //setTimeout(() => consume(i + 1), 90);
       } else {
         resolve();
         nextFrame(0);
