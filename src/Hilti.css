@@ -1,3 +1,7 @@
+a:focus{
+  outline: 0 none;
+}
+
 .hilti{
   position: absolute;
   top: 0;
@@ -61,3 +65,10 @@
   padding: 0.15em 0.4em;
 }
 
+.ReactModal__Content{
+  font-size: 16px;
+}
+.ReactModal__Content h1{
+  font-size: 30px;
+  text-align: center;
+}
