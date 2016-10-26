@@ -35,7 +35,8 @@ export default class Hilti extends Component {
         top: verticalMarge,
         bottom: verticalMarge,
         left: horizontalMarge,
-        right: horizontalMarge
+        right: horizontalMarge,
+        background: 'rgba(0,0,0,0.7)'
       },
       overlay: {
         background: 'rgba(0,0,0,0.2)'

@@ -66,7 +66,9 @@ a:focus{
 }
 
 .ReactModal__Content{
+  color: white;
   font-size: 16px;
+  border: 1px solid rgba(255,255,255,0.2);
 }
 .ReactModal__Content h1{
   font-size: 30px;
