@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
+import { decimal } from './utils';
 import App from './App.jsx';
 import { fetchPoints, hiltiMapper } from './Hilti/api';
 import options from './options/reducers';
@@ -33,18 +34,12 @@ const store = createStore(reducers,
 function dispatchResize() {
   store.dispatch(viewportResized(window.innerWidth, window.innerHeight));
 }
-
-
 dispatchResize();
 window.addEventListener('resize', _.debounce(dispatchResize, 250));
 
 store.dispatch(loadOptionsFromEnv(window));
 
-//store.subscribe(() => console.log('NEW STATE', store.getState()));
-
-
 const ONE_DAY = 1000 * 60 * 60 * 24;
-
 
 function streamArray(json) {
 
@@ -52,11 +47,10 @@ function streamArray(json) {
   const array = hiltiMapper(json);
 
   function dispatchValues(coef) {
-    const currentOrderAmmount = Math.round(OrderAmount * coef);
     store.dispatch(setHiltiCounter({
       globalCount: StartValue + Math.round(SalesAmount * coef),
-      dailyOrder: currentOrderAmmount,
-      annualOrder: OrderValue + currentOrderAmmount
+      dailyOrder: Math.round(OrderAmount * decimal(coef)),
+      annualOrder: OrderValue + Math.round(OrderAmount * coef)
     }));
   }
 
