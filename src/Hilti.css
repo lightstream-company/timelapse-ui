@@ -26,8 +26,12 @@ a:focus{
   font-weight: bold;
 }
 
+.explain{
+  font-size: 4.8em;
+  padding: 0.5em 0;
+}
+
 .buttons{
-  padding: 5em 0;
 }
 
 .buttons a{
@@ -52,7 +56,7 @@ a:focus{
   position: absolute;
   left: 0;
   width: 100%;
-  top: 51%;
+  top: 49%;
   height: 2.7em; 
   margin-top: -13.5em;
   text-align: center;
@@ -67,7 +71,7 @@ a:focus{
 
 .ReactModal__Content{
   color: white;
-  font-size: 16px;
+  font-size: 20px;
   border: 1px solid rgba(255,255,255,0.2);
 }
 .ReactModal__Content h1{
