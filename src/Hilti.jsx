@@ -10,18 +10,19 @@ export default class Hilti extends Component {
   state = {
     modalIsOpen: false
   }
-  open(e) {
-    if(e){
+  setModelState(e, modalIsOpen) {
+    if (e) {
       e.preventDefault();
     }
     this.setState({
-      modalIsOpen: true
+      modalIsOpen
     });
   }
-  close() {
-    this.setState({
-      modalIsOpen: false
-    });
+  open(e) {
+    this.setModelState(e, true);
+  }
+  close(e) {
+    this.setModelState(e, false);
   }
   render() {
     const {globalCount, dailyOrder, annualOrder, width, height} = this.props;
@@ -71,6 +72,7 @@ export default class Hilti extends Component {
         </strong> this year
       </div>
       <Modal {...modalProps}>
+        <div className="close" onClick={(e) => this.close(e)}>×</div>
         <h1>Learn More</h1>
         <p>
           As part of our push towards 1 billion CHF in online sales, we would like to give you the chance to win prizes. You can win by <strong>guessing</strong> when and where we will hit the billion and by <strong>selling</strong> via online channels.<br />
