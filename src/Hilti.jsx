@@ -27,7 +27,7 @@ export default class Hilti extends Component {
   render() {
     const {globalCount, dailyOrder, annualOrder, width, height} = this.props;
     const {modalIsOpen} = this.state;
-    const h = 470;
+    const h = 490;
     const w = 590;
     const verticalMarge = Math.max((height - h) / 2, 0);
     const horizontalMarge = Math.max((width - w) / 2, 0);
@@ -49,7 +49,7 @@ export default class Hilti extends Component {
       style
     };
     return <div className="hilti">
-      <h1><img src="./logo.png" alt="Hilti" /></h1>
+      <h1><img src="./logo.jpg" width="140" alt="Hilti" /></h1>
       <div className="chf-count">
         <div className="main-count">
           <Monospacer text={formater(globalCount)} /> CHF
@@ -79,7 +79,7 @@ export default class Hilti extends Component {
           <br />
           Submit <strong>when and where you think the order that will take us to the billion will be placed</strong>. The winner will be the person that submits the guess closest to the actual date and location of the order. Everyone is welcome to participate.<br />
           <br />
-          <strong>All sales people are also automatically enrolled in a global sales competition</strong>. There will be one winner per HUB and MO. The winner will be the person that sells most, in absolute numbers, via our online channels. Sales will be tracked from 1st of November to the date we hit the billion.<br />
+          <strong>All sales people are also automatically enrolled in a global sales competition</strong>. There will be one winner per HUB and MO. The winner will be the person that sells most, in absolute numbers, via our online channels. Competition will close December 2nd. Only one guess per person.
           <br />
           For prizes please see and join Yammer group: Hilti e-billion
         </p>

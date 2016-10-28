@@ -3,6 +3,7 @@ a:focus{
 }
 
 .hilti{
+  font-family: HiltiExtended;
   position: absolute;
   top: 0;
   left: 0;
@@ -23,7 +24,11 @@ a:focus{
   left: 3%;
   line-height: 1.5em;
   font-size: 3.4em;
-  font-weight: bold;
+  font-family: HiltiBold;
+}
+
+.orders strong{
+  font-family: HiltiExtended;
 }
 
 .explain{
@@ -36,11 +41,11 @@ a:focus{
 
 .buttons a{
   display: inline-block;
-  font-size: 3.1em;
+  font-size: 2.8em;
   border: 1px solid rgba(255,255,255,0.4);
   padding: 0.6em 0.7em;
   margin: 0 0.8em;
-  width: 7em;
+  width: 7.5em;
   color: white;
   text-decoration: none;
   transition: all 250ms;
@@ -71,7 +76,8 @@ a:focus{
 
 .ReactModal__Content{
   color: white;
-  font-size: 20px;
+  font-family: HiltiRoman;
+  font-size: 18px;
   border: 1px solid rgba(255,255,255,0.2);
 }
 .ReactModal__Content h1{
