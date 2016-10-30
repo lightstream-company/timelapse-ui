@@ -11,7 +11,7 @@ export default function Monospacer({text, width, filter}) {
       const style = validate(c) ? {} : {
         display: 'inline-block',
         textAlign: 'center',
-        width: width || '0.55em'
+        width: width || '0.62em'
       };
       return <span key={i} style={style}>{c}</span>;
     })}
