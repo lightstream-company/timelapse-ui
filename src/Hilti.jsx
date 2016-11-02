@@ -65,7 +65,7 @@ export default class Hilti extends Component {
       <div className="orders">
         <strong>
           <Monospacer text={formater(dailyOrder)} />
-        </strong> order today
+        </strong> e-business orders today
         <br />
         <strong>
           <Monospacer text={formater(annualOrder)} />
