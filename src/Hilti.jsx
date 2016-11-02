@@ -69,7 +69,7 @@ export default class Hilti extends Component {
         <br />
         <strong>
           <Monospacer text={formater(annualOrder)} />
-        </strong> this year
+        </strong> e-business orders this year
       </div>
       <Modal {...modalProps}>
         <div className="close" onClick={(e) => this.close(e)}>×</div>
