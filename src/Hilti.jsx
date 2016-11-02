@@ -58,7 +58,7 @@ export default class Hilti extends Component {
           When do you think we will hit the billion?
         </div>
         <div className="buttons">
-          <a target="_blank" href="http://form.hilti.com/form-15830/RD-Digital-1B-CHF">Submit your guess</a>
+          <a target="_blank" href="https://form.hilti.com/form-15830/RD-Digital-1B-CHF">Submit your guess</a>
           <a href="#" onClick={(e) => this.open(e)}>Learn more</a>
         </div>
       </div>
