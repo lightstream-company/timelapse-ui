@@ -74,6 +74,44 @@ a:focus{
   padding: 0.15em 0.4em;
 }
 
+.billion{
+  position: absolute;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(5);
+    opacity: 0;
+  }
+}
+.billion .dot{
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 10px;
+  height: 10px;
+  background: #d10d26;
+  border-radius: 10px;
+}
+
+.billion .dot.animated{
+  animation: pulse 1.2s infinite cubic-bezier(0.470, 0.010, 0.510, 1.005);
+}
+
+.billion .text{
+  text-shadow: 0 0 4px #000;
+  position: absolute;
+  width: 300px;
+  left: -150px;
+  text-align: center;
+  top: 9px;
+  font-size: 1.3em;
+}
+
 .ReactModal__Content{
   color: white;
   font-family: HiltiRoman;

@@ -5,5 +5,6 @@ export default handleActions({
 }, {
   globalCount: 0,
   dailyOrder: 0,
-  annualOrder: 0
+  annualOrder: 0,
+  finalSale: null
 });

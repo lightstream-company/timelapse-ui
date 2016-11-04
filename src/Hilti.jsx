@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import format from 'format-number';
 import Monospacer from './Monospacer.jsx';
 import Modal from 'react-modal';
+import { project } from 'equirectangular-projection';
 
 const formater = format();
 
@@ -25,7 +26,7 @@ export default class Hilti extends Component {
     this.setModelState(e, false);
   }
   render() {
-    const {globalCount, dailyOrder, annualOrder, width, height} = this.props;
+    const {finalSale, globalCount, dailyOrder, annualOrder, width, height} = this.props;
     const {modalIsOpen} = this.state;
     const h = 490;
     const w = 590;
@@ -48,8 +49,17 @@ export default class Hilti extends Component {
       onRequestClose: () => this.close(),
       style
     };
+    var billion;
+    if(finalSale){
+      billion = <div style={project(finalSale.Lat, finalSale.Long, width)} className="billion">
+        <div className="dot"></div>
+        <div className="dot animated"></div>
+        <div className="text">1 billion hit at {finalSale.City}</div>
+      </div>;
+    }
     return <div className="hilti">
       <h1><img src="./logo.jpg" width="140" alt="Hilti" /></h1>
+      {billion}
       <div className="chf-count">
         <div className="main-count">
           <Monospacer text={formater(globalCount)} /> CHF

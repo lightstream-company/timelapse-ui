@@ -43,14 +43,15 @@ const ONE_DAY = 1000 * 60 * 60 * 24;
 
 function streamArray(json) {
 
-  const {StartValue, SalesAmount, OrderValue, OrderAmount, StartDate} = json;
+  const {FinalSale, StartValue, SalesAmount, OrderValue, OrderAmount, StartDate} = json;
   const array = hiltiMapper(json);
 
   function dispatchValues(coef) {
     store.dispatch(setHiltiCounter({
       globalCount: StartValue + Math.round(SalesAmount * coef),
       dailyOrder: Math.round(OrderAmount * decimal(coef)),
-      annualOrder: OrderValue + Math.round(OrderAmount * coef)
+      annualOrder: OrderValue + Math.round(OrderAmount * coef),
+      finalSale: FinalSale
     }));
   }
 

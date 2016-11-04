@@ -5,7 +5,8 @@ export function hiltiMapper(json) {
 }
 
 export function fetchPoints(){
-  const url = 'http://billion.hilti.paulschwarz.me/billion.json';
+  const dev = document.location.search.indexOf('test') > -1;
+  const url = dev ? './billion.json' : 'http://billion.hilti.paulschwarz.me/billion.json';
   //const url = './billion.json';
   return fetchJSON(url);
 }
