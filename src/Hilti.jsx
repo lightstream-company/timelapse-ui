@@ -54,7 +54,7 @@ export default class Hilti extends Component {
       billion = <div style={project(finalSale.Lat, finalSale.Long, width)} className="billion">
         <div className="dot"></div>
         <div className="dot animated"></div>
-        <div className="text">1 billion hit at {finalSale.City}</div>
+        <div className="text">1 billion hit in {finalSale.City}</div>
       </div>;
     }
     return <div className="hilti">

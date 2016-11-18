@@ -81,19 +81,19 @@ a:focus{
 @keyframes pulse {
   0% {
     transform: scale(1);
-    opacity: 1;
+    opacity: 0.9;
   }
   100% {
-    transform: scale(5);
+    transform: scale(6);
     opacity: 0;
   }
 }
 .billion .dot{
   position: absolute;
-  top: -5px;
-  left: -5px;
-  width: 10px;
-  height: 10px;
+  top: -3px;
+  left: -3px;
+  width: 6px;
+  height: 6px;
   background: #d10d26;
   border-radius: 10px;
 }
