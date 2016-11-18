@@ -9,7 +9,7 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
 import App from './App.jsx';
-import { fetchPoints } from './api';
+import { fetchPoints, fetchRawPost } from './api';
 import options from './options/reducers';
 import { loadOptionsFromEnv } from './options/actions';
 import viewport from './Viewport/reducers';
@@ -39,20 +39,40 @@ store.dispatch(loadOptionsFromEnv(window));
 
 //store.subscribe(() => console.log('NEW STATE', store.getState()));
 
+function getPostDate(post) {
+  if (post.twp_source === 'instagram') {
+    return parseInt(post.created_time, 0) * 1000;
+  }
+}
+
 //const timer = 10000 / 15 / 60;
 fetchPoints().then((json) => {
-  function consume(i) {
-    const point = json[i];
-    if (point) {
-      const [id, lng, lat] = point; // eslint-disable-line no-unused-vars
-      store.dispatch(drawPoint(lng, lat));
-      raf(() => consume(i + 1), 18);
+  const firstId = json[0][0];
+  const lastId = json[json.length - 1][0];
+  Promise.all([
+    fetchRawPost(firstId),
+    fetchRawPost(lastId)
+  ]).then((posts) => {
+    console.log(posts);
+    const startAt = getPostDate(posts[0]);
+    const endAt = getPostDate(posts[1]);
+    const delta = endAt - startAt;
+    console.log(delta);
+
+    function consume(i) {
+      const point = json[i];
+      if (point) {
+        const [id, lng, lat] = point; // eslint-disable-line no-unused-vars
+        store.dispatch(drawPoint(lng, lat));
+        raf(() => consume(i + 1), 18);
       //setTimeout(() => consume(i + 1), timer);
-    } else {
-      raf(() => consume(0), 18);
+      } else {
+        raf(() => consume(0), 18);
+      }
     }
-  }
-  consume(0);
+    consume(0);
+  });
+
 });
 
 ReactDOM.render(
