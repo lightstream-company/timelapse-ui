@@ -8,13 +8,6 @@ function floorDay(time){
   return time - (time % day);
 }
 
-export function truncate(pos){
-  return [
-    360 + pos[0],
-    pos[1]
-  ];
-}
-
 export function antipode(position) {
   return [position[0] + 180, -position[1]];
 }
