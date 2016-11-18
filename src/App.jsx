@@ -9,10 +9,10 @@ export default function App(){
   return <div>
     <h1>Hilti</h1>
     <Layout>
+      <Terminator time={new Date().getTime()} />
       <Canvas imageNumber={5} lightsByImage={1000} />
       <AnimatedCanvas lightsNumber={15} />
       <Marker />
-      <Terminator time={new Date().getTime()} />
     </Layout>
   </div>;
 }
