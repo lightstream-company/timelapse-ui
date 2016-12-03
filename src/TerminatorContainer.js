@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 export default connect((state) => {
   return {
     width: state.viewport.width,
-    height: state.viewport.height
+    height: state.viewport.height,
+    time: state.time
   };
 })(Terminator);

@@ -16,11 +16,14 @@ import viewport from './Viewport/reducers';
 import { viewportResized } from './Viewport/actions';
 import geo from './Geo/reducers';
 import { drawPoint } from './Geo/actions';
+import time from './Time/reducers';
+import { setTime } from './Time/actions';
 
 
 const reducers = combineReducers({
   options,
   viewport,
+  time,
   geo
 });
 
@@ -53,21 +56,20 @@ fetchPoints().then((json) => {
     fetchRawPost(firstId),
     fetchRawPost(lastId)
   ]).then((posts) => {
-    console.log(posts);
     const startAt = getPostDate(posts[0]);
     const endAt = getPostDate(posts[1]);
     const delta = endAt - startAt;
-    console.log(delta);
 
     function consume(i) {
       const point = json[i];
       if (point) {
         const [id, lng, lat] = point; // eslint-disable-line no-unused-vars
         store.dispatch(drawPoint(lng, lat));
+        store.dispatch(setTime(Math.round(startAt + delta * i / 10000)));
         raf(() => consume(i + 1), 18);
       //setTimeout(() => consume(i + 1), timer);
       } else {
-        raf(() => consume(0), 18);
+        //raf(() => consume(0), 18);
       }
     }
     consume(0);

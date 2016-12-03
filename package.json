@@ -1,7 +1,6 @@
 {
-  "name": "timelapse",
-  "version": "0.1.0",
-  "private": true,
+  "name": "lightping-timelapse",
+  "version": "0.1.1",
   "homepage": "./",
   "devDependencies": {
     "enzyme": "^2.4.1",
