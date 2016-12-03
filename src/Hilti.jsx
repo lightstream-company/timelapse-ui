@@ -64,13 +64,6 @@ export default class Hilti extends Component {
         <div className="main-count">
           <Monospacer text={formater(globalCount)} /> CHF
         </div>
-        <div className="explain">
-          When do you think we will hit the billion?
-        </div>
-        <div className="buttons">
-          <a target="_blank" href="https://form.hilti.com/form-15830/RD-Digital-1B-CHF">Submit your guess</a>
-          <a href="#" onClick={(e) => this.open(e)}>Learn more</a>
-        </div>
       </div>
       <div className="orders">
         <strong>
