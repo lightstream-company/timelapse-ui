@@ -6,9 +6,15 @@ const initialState = new State({
 });
 
 export default handleActions({
-  LOAD_OPTIONS: (state, action) => State.update(state, {
-    bgColor: {
-      '$set': action.payload.bgColor
+  LOAD_OPTIONS: (state, {payload}) => {
+    if (payload && payload.bgColor) {
+      return State.update(state, {
+        bgColor: {
+          '$set': payload.bgColor
+        }
+      });
+    } else {
+      return state;
     }
-  })
+  }
 }, initialState);
