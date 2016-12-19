@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import { Options as State } from './types';
 
 const initialState = new State({
-  bgColor: '333'
+  bgColor: '444444'
 });
 
 export default handleActions({

@@ -7,11 +7,18 @@
 .Layout .content{
   position: absolute;
   left: 0;
+}
+
+.Layout .content .bg{
+  opacity: 0.55;
+  position: absolute;
+  top: 0;
+  left: 0;
   background-size: cover;
   background-repeat: no-repeat;
 }
-
 .Layout .bottom{
+  opacity: 0.55;
   background: #000;  
   position: absolute;
 }

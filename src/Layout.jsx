@@ -17,8 +17,12 @@ export default function Layout(props) {
     top: marge,
     left: 0,
     width,
-    backgroundImage: 'url(./world-map-black.png)',
     height: width / 2
+  };
+  const bg = {
+    width,
+    height: width / 2,
+    backgroundImage: 'url(./world-map-black.png)'
   };
   const bottom = {
     bottom: 0,
@@ -28,6 +32,7 @@ export default function Layout(props) {
   };
   return <div className="Layout" style={layer}>
     <div style={content} className="content">
+      <div className="bg" style={bg}></div>
       {children}
     </div>
     <div className="bottom" style={bottom}></div>
