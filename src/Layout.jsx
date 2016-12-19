@@ -4,9 +4,9 @@ import './Layout.css';
 
 export default function Layout(props) {
   const {width, height, children, background} = props;
-  const formattedBackground = /[0-9]{6,}/.test(background) ? '#' + background : background;
+  const formattedBackground =  '#' + background;
   const centerColor = color(formattedBackground).rgbString();
-  const externaColor = color(formattedBackground).darken(0.1).rgbString();
+  const externaColor = color(formattedBackground).darken(0.15).rgbString();
   const marge = (height - (width / 2)) / 2;
   const layer = {
     height,
