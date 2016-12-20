@@ -1,12 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
-import { project } from 'equirectangular-projection';
+import { project, projectLat } from 'equirectangular-projection';
 import { antipode, solarPosition } from './terminator';
 import * as d3 from 'd3-geo';
 
 
 export default function Terminator(props) {
-  const {width, height, time} = props;
+  const {width, time} = props;
 
   const solar = solarPosition(time);
   const [lng, lat] = antipode(solar);
@@ -18,22 +18,26 @@ export default function Terminator(props) {
 
   const circle = circleGenerator();
 
-  const points = _.sortBy(circle.coordinates[0], (coor) => coor[0]).map((coor) => {
+  const sorted =  _.sortBy(circle.coordinates[0], (coor) => coor[0]);
+  const points = sorted.map((coor) => {
     const {top, left} = project(coor[0], coor[1], width);
     return left + ' ' + top;
   });
+  const outsideY = projectLat(sorted[0][1], width / 2);
+  points.unshift('-30 ' + outsideY);
   points.unshift('0 0');
   points.unshift(width + ' 0');
+  points.unshift((width + 30)+ ' ' + outsideY);
 
   return <svg {...{
       width,
-      height,
+      height: width / 2,
       style: {
         position: 'absolute'
       }
     }}>
     <polygon points={points.join(', ')} style={{
-      opacity: 0.3
+      opacity: 0.25
     }}/>
   </svg>;
 }

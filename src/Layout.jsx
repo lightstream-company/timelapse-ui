@@ -30,11 +30,19 @@ export default function Layout(props) {
     height: marge,
     width
   };
+  const terminatorMask = {
+    top: 0,
+    left: 0,
+    height: marge,
+    width,
+    opacity: 0.25
+  };
   return <div className="Layout" style={layer}>
     <div style={content} className="content">
       <div className="bg" style={bg}></div>
       {children}
     </div>
+    <div className="terminator-mask" style={terminatorMask}></div>
     <div className="bottom" style={bottom}></div>
   </div>;
 }
