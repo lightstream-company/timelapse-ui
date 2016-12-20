@@ -4,7 +4,7 @@ import Canvas from './CanvasContainer';
 import Marker from './MarkerContainer';
 import Terminator from './TerminatorContainer';
 import AnimatedCanvas from './AnimatedCanvasContainer';
-//import DigitDate from './DigitDateContainer';
+import DigitDate from './DigitDateContainer';
 
 export default function App(){
   return <div>
@@ -14,6 +14,7 @@ export default function App(){
       <Canvas imageNumber={5} lightsByImage={1000} />
       <AnimatedCanvas lightsNumber={15} />
       <Marker />
+      <DigitDate />
     </Layout>
   </div>;
 }
