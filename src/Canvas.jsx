@@ -12,13 +12,15 @@ class Canvas extends Component {
   componentWillReceiveProps(props) {
 
     const {point, width} = props;
-    const {imageNumber, lightsByImage} = this.props;
+    const {imageNumber, lightsByImage, color} = this.props;
     const height = Math.ceil(width / 2);
 
     if (!this.draw) {
       this.ctx = this.refs.canvas.getContext('2d');
       this.draw = renderer(this.ctx, {
-        lineOpacity: 0.05
+        lineOpacity: 0.04,
+        lineColor: color,
+        pointColor: [255, 255, 255]
       });
     }
 

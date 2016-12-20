@@ -8,7 +8,7 @@ class AnimatedCanvas extends Component {
 
   componentWillReceiveProps(props) {
 
-    const {point, width} = props;
+    const {point, width, color} = props;
     const height = Math.ceil(width / 2);
     const {lightsNumber} = this.props;
     if (!this.lights) {
@@ -18,7 +18,9 @@ class AnimatedCanvas extends Component {
     if (!this.draw) {
       this.ctx = this.refs.canvas.getContext('2d');
       this.draw = renderer(this.ctx, {
-        lineOpacity: 0.2
+        lineOpacity: 0.1,
+        lineColor: color,
+        pointColor: [255, 255, 255]
       });
     }
 
@@ -37,7 +39,7 @@ class AnimatedCanvas extends Component {
       const size = this.lights.length;
       this.lights.forEach((light, i) => {
         updateLightStructure(light);
-        const opacity = _.round(i/size, 2);
+        const opacity = _.round(i/size * 0.5, 2);
         //console.log(opacity);
         //debugger;
         this.draw(light, opacity);
