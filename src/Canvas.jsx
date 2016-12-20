@@ -18,7 +18,7 @@ class Canvas extends Component {
     if (!this.draw) {
       this.ctx = this.refs.canvas.getContext('2d');
       this.draw = renderer(this.ctx, {
-        lineOpacity: 0.04,
+        lineOpacity: 0.03,
         lineColor: color,
         pointColor: [255, 255, 255]
       });

@@ -6,7 +6,8 @@ import * as d3 from 'd3-geo';
 
 
 export default function Terminator(props) {
-  const {width, time} = props;
+  const {width, time, marge} = props;
+  const opacity = 0.25;
 
   const solar = solarPosition(time);
   const [lng, lat] = antipode(solar);
@@ -18,7 +19,7 @@ export default function Terminator(props) {
 
   const circle = circleGenerator();
 
-  const sorted =  _.sortBy(circle.coordinates[0], (coor) => coor[0]);
+  const sorted = _.sortBy(circle.coordinates[0], (coor) => coor[0]);
   const points = sorted.map((coor) => {
     const {top, left} = project(coor[0], coor[1], width);
     return left + ' ' + top;
@@ -27,17 +28,28 @@ export default function Terminator(props) {
   points.unshift('-30 ' + outsideY);
   points.unshift('0 0');
   points.unshift(width + ' 0');
-  points.unshift((width + 30)+ ' ' + outsideY);
+  points.unshift((width + 30) + ' ' + outsideY);
 
-  return <svg {...{
+  const terminatorMask = {
+    top: -marge,
+    left: 0,
+    height: marge,
+    width,
+    opacity
+  };
+
+  return <div>
+    <div className="terminator-mask" style={terminatorMask}></div>
+    <svg {...{
       width,
       height: width / 2,
       style: {
         position: 'absolute'
       }
     }}>
-    <polygon points={points.join(', ')} style={{
-      opacity: 0.25
+      <polygon points={points.join(', ')} style={{
+      opacity
     }}/>
-  </svg>;
+    </svg>
+  </div>;
 }
