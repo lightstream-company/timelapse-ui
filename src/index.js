@@ -9,11 +9,13 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
 import App from './App.jsx';
-import { fetchPoints, fetchRawPost } from './api';
+import { fetchPoints, fetchRawPost, fetchWall } from './api';
 import options from './options/reducers';
 import { loadOptionsFromEnv } from './options/actions';
 import viewport from './Viewport/reducers';
+import wall from './wall/reducers';
 import { viewportResized } from './Viewport/actions';
+import { wallResized, wallPostReceived, wallCleared } from './wall/actions';
 import geo from './Geo/reducers';
 import { drawPoint } from './Geo/actions';
 import time from './Time/reducers';
@@ -23,6 +25,7 @@ import { setTime } from './Time/actions';
 const reducers = combineReducers({
   options,
   viewport,
+  wall,
   time,
   geo
 });
@@ -36,7 +39,11 @@ function dispatchResize() {
 
 
 dispatchResize();
-window.addEventListener('resize', _.debounce(dispatchResize, 250));
+window.addEventListener('resize', _.debounce(() => {
+  dispatchResize();
+  wallResized(window.innerWidth / 50);
+  feedWall();
+}, 250));
 
 store.dispatch(loadOptionsFromEnv(window));
 
@@ -52,7 +59,7 @@ function getPostDate(post) {
 
 const dispatchTime = _.throttle((time) => {
   store.dispatch(setTime(time));
-}, 1000 / 12);
+}, 1000 / 24);
 
 //const timer = 10000 / 15 / 60;
 fetchPoints().then((json) => {
@@ -82,6 +89,18 @@ fetchPoints().then((json) => {
   });
 
 });
+
+function feedWall(){
+  fetchWall(store.getState().wall.size).then((posts) => {
+    store.dispatch(wallCleared());
+    posts.forEach((post, i) => setTimeout(() => {
+      store.dispatch(wallPostReceived(post));
+    }, i * 200));
+  });
+}
+
+wallResized(10);
+feedWall();
 
 ReactDOM.render(
   <Provider store={store}>

@@ -3,6 +3,13 @@ import { WallState } from './types';
 
 
 export default handleActions({
+  WALL_CLEARED: (state) => {
+    return WallState.update(state, {
+      posts: {
+        '$set': []
+      }
+    });
+  },
   WALL_POST_RECEIVED: (state, action) => {
     return WallState.update(state, {
       posts: {
