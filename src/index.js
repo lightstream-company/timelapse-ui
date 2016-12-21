@@ -45,13 +45,19 @@ store.dispatch(loadOptionsFromEnv(window));
 function getPostDate(post) {
   if (post.twp_source === 'instagram') {
     return parseInt(post.created_time, 0) * 1000;
+  }else if(post.twp_source === 'twitter') {
+    return new Date(post.created_at).getTime();
   }
 }
 
+const dispatchTime = _.throttle((time) => {
+  store.dispatch(setTime(time));
+}, 1000 / 12);
+
 //const timer = 10000 / 15 / 60;
 fetchPoints().then((json) => {
-  const firstId = json[0][0];
-  const lastId = json[json.length - 1][0];
+  const lastId = json[0][0];
+  const firstId = json[json.length - 1][0];
   Promise.all([
     fetchRawPost(firstId),
     fetchRawPost(lastId)
@@ -65,7 +71,7 @@ fetchPoints().then((json) => {
       if (point) {
         const [id, lng, lat] = point; // eslint-disable-line no-unused-vars
         store.dispatch(drawPoint(lng, lat));
-        store.dispatch(setTime(Math.round(startAt + delta * i / 10000)));
+        dispatchTime(Math.round(startAt + delta * i / 10000));
         raf(() => consume(i + 1), 18);
       //setTimeout(() => consume(i + 1), timer);
       } else {
