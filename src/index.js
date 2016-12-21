@@ -9,7 +9,7 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
 import App from './App.jsx';
-import { fetchPoints, fetchRawPost, fetchWall } from './api';
+import { fetchPoints, fetchRawPost, fetchWall, connection } from './api';
 import options from './options/reducers';
 import { loadOptionsFromEnv } from './options/actions';
 import viewport from './Viewport/reducers';
@@ -99,8 +99,10 @@ function feedWall(){
   });
 }
 
-wallResized(10);
 feedWall();
+connection.connect('wall', (post) => {
+  store.dispatch(wallPostReceived(post));
+});
 
 ReactDOM.render(
   <Provider store={store}>
