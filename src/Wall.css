@@ -1,0 +1,32 @@
+.Wall{
+  position: absolute;
+  bottom: 15%;
+  left: 2%;
+  width: 25%;
+  border-top: 1px solid rgba(255,255,255,0.4);
+  padding-top: 3px;
+  font-size: 11px;
+  font-family: monospace;
+  font-weight: thin;
+}
+
+@keyframes fadeIn{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+.Wall p{
+  position: absolute;
+  transition: 0.3s all;
+  animation: fadeIn 0.5s;
+  left: 0;
+  padding: 0;
+  height: 1.4em;
+  line-height: 1.4em;
+  overflow: hidden;
+  margin: 0;
+}
