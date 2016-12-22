@@ -11,7 +11,7 @@ export default function App(){
     <h1>Hilti</h1>
     <Layout>
       <Terminator />
-      <Canvas imageNumber={5} lightsByImage={1000} />
+      <Canvas imageNumber={9} lightsByImage={1000} />
       <AnimatedCanvas lightsNumber={15} />
       <Marker />
       <DigitDate />

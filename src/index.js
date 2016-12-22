@@ -63,6 +63,7 @@ const dispatchTime = _.throttle((time) => {
 
 //const timer = 10000 / 15 / 60;
 fetchPoints().then((json) => {
+  const size = json.length;
   const lastId = json[0][0];
   const firstId = json[json.length - 1][0];
   Promise.all([
@@ -70,7 +71,7 @@ fetchPoints().then((json) => {
     fetchRawPost(lastId)
   ]).then((posts) => {
     const startAt = getPostDate(posts[0]);
-    const endAt = getPostDate(posts[1]);
+    const endAt = Date.now();//getPostDate(posts[1]);
     const delta = endAt - startAt;
 
     function consume(i) {
@@ -78,11 +79,12 @@ fetchPoints().then((json) => {
       if (point) {
         const [id, lng, lat] = point; // eslint-disable-line no-unused-vars
         store.dispatch(drawPoint(lng, lat));
-        dispatchTime(Math.round(startAt + delta * i / 10000));
+        dispatchTime(Math.round(startAt + delta * i / (size - 1)));
         raf(() => consume(i + 1), 18);
       //setTimeout(() => consume(i + 1), timer);
       } else {
         //raf(() => consume(0), 18);
+        setInterval(() => dispatchTime(Date.now()), 1000);
       }
     }
     consume(0);
