@@ -12,14 +12,14 @@ import App from './App.jsx';
 import { fetchPoints, fetchRawPost, fetchWall, connection } from './api';
 import options from './options/reducers';
 import { loadOptionsFromEnv } from './options/actions';
-import viewport from './Viewport/reducers';
+import viewport from './viewport/reducers';
 import wall from './wall/reducers';
-import { viewportResized } from './Viewport/actions';
+import { viewportResized } from './viewport/actions';
 import { wallResized, wallPostReceived, wallCleared } from './wall/actions';
-import geo from './Geo/reducers';
-import { drawPoint } from './Geo/actions';
-import time from './Time/reducers';
-import { setTime } from './Time/actions';
+import geo from './geo/reducers';
+import { drawPoint } from './geo/actions';
+import time from './time/reducers';
+import { setTime } from './time/actions';
 
 
 const reducers = combineReducers({

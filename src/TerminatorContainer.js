@@ -1,6 +1,6 @@
 import Terminator from './Terminator.jsx';
 import { connect } from 'react-redux';
-import { margin } from './Viewport/selector';
+import { margin } from './viewport/selector';
 
 export default connect((state) => {
   return {
