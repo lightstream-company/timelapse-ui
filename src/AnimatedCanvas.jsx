@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import raf from 'raf';
 import { renderer, createLightStructure, updateLightStructure } from 'tweetping-light-drawer';
 import { project } from 'equirectangular-projection';
 
 
 class AnimatedCanvas extends Component {
 
-  componentWillReceiveProps(props) {
+  componentDidMount(){
+    raf(() => this.renderCanvas());
+    this._mounted = true;
+  }
 
+  componentWillReceiveProps(props) {
     const {point, width, color} = props;
-    const height = Math.ceil(width / 2);
     const {lightsNumber} = this.props;
     if (!this.lights) {
       this.lights = [];
@@ -24,7 +28,6 @@ class AnimatedCanvas extends Component {
       });
     }
 
-    this.ctx.clearRect(0, 0, width, height);
 
     if (point) {
       const {lng, lat} = point;
@@ -36,6 +39,18 @@ class AnimatedCanvas extends Component {
       if (this.lights.length > lightsNumber) {
         this.lights.shift();
       }
+    }
+  }
+
+  componentWillUnmount(){
+    delete this._unmount;
+  }
+
+  renderCanvas(){
+    const {width} = this.props;
+    const height = Math.ceil(width / 2);
+    this.ctx.clearRect(0, 0, width, height);
+    if(this.lights){
       const size = this.lights.length;
       this.lights.forEach((light, i) => {
         updateLightStructure(light);
@@ -44,6 +59,9 @@ class AnimatedCanvas extends Component {
         //debugger;
         this.draw(light, opacity);
       });
+    }
+    if(this._mounted){
+      raf(() => this.renderCanvas());
     }
   }
 
