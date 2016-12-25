@@ -52,7 +52,7 @@ store.dispatch(loadOptionsFromEnv(window));
 function getPostDate(post) {
   if (post.twp_source === 'instagram') {
     return parseInt(post.created_time, 0) * 1000;
-  }else if(post.twp_source === 'twitter') {
+  } else if (post.twp_source === 'twitter') {
     return new Date(post.created_at).getTime();
   }
 }
@@ -71,7 +71,7 @@ fetchPoints().then((json) => {
     fetchRawPost(lastId)
   ]).then((posts) => {
     const startAt = getPostDate(posts[0]);
-    const endAt = Date.now();//getPostDate(posts[1]);
+    const endAt = Date.now(); //getPostDate(posts[1]);
     const delta = endAt - startAt;
 
     function consume(i) {
@@ -92,7 +92,7 @@ fetchPoints().then((json) => {
 
 });
 
-function feedWall(){
+function feedWall() {
   fetchWall(store.getState().wall.size).then((posts) => {
     store.dispatch(wallCleared());
     posts.forEach((post, i) => setTimeout(() => {

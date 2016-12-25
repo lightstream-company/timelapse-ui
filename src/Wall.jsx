@@ -5,8 +5,7 @@ export default function Wall(props){
   const {posts, color} = props;
   const size = posts.length;
   const style = {
-    color:  color,
-    height: size * 1.4 + 'em'
+    color:  color
   };
   return <div className="Wall" style={style}>
     {posts.map((post, i) => {
