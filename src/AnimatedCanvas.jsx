@@ -49,12 +49,14 @@ class AnimatedCanvas extends Component {
   renderCanvas(){
     const {width} = this.props;
     const height = Math.ceil(width / 2);
-    this.ctx.clearRect(0, 0, width, height);
+    if(this.ctx){
+      this.ctx.clearRect(0, 0, width, height);
+    }
     if(this.lights){
       const size = this.lights.length;
       this.lights.forEach((light, i) => {
         updateLightStructure(light);
-        const opacity = _.round(i/size * 0.5, 2);
+        const opacity = _.round(i/size * 0.2, 2);
         //console.log(opacity);
         //debugger;
         this.draw(light, opacity);

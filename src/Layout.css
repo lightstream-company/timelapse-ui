@@ -10,7 +10,7 @@
 }
 
 .Layout .content .bg{
-  opacity: 0.55;
+  opacity: 0.50;
   position: absolute;
   top: 0;
   left: 0;
@@ -24,7 +24,7 @@
 }
 
 .Layout .bottom{
-  opacity: 0.55;
+  opacity: 0.50;
   background: #000;  
   position: absolute;
 }
