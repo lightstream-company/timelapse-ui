@@ -1,5 +1,5 @@
 .Clock{
-  border: 1px solid white;
+  border: 3px solid white;
   position: absolute;
 }
 
@@ -13,7 +13,7 @@
 }
 
 .Clock .hour{
-  margin-top: -2px;
+  margin-top: -1px;
   height: 3px;
 }
 
@@ -24,4 +24,14 @@
 .Clock .second{
   opacity: 0.5;
   height: 1px;
+}
+
+.Clock .center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  width: 5px;
+  height: 5px;
+  margin: -2px 0 0 -2px;
 }

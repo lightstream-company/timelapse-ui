@@ -18,7 +18,7 @@ export default function App(){
       <AnimatedCanvas lightsNumber={15} />
       <Marker />
       <DigitDate />
-      <Clock width="50" />
+      <Clock width="51" />
       <Wall />
     </Layout>
   </div>;

@@ -10,8 +10,8 @@ export default function DateComponent(props){
   return <div className="DigitDate" style={newStyle}>
     {moment(time).format('dddd')}
     <br />
-    {moment(time).format('MMMM Do YYYY')}
+    {moment(time).format('MMMM Do, YYYY')}
     <br />
-    {moment(time).format('HH:mm:ss')}
+    {moment(time).format('HH:mm')}
   </div>;
 }

@@ -14,7 +14,13 @@ export default function Wall(props){
         top: i * 1.4 + 'em',
         opacity: idx / size
       };
-      return <p key={post._id} style={s}>{post.text}</p>;
+      const img = {
+        backgroundImage: `url(${post.user.profile_picture})`
+      };
+      return <p key={post._id} style={s}>
+        <span className="pict" style={img}></span>
+        {post.text}
+      </p>;
     })}
   </div>;
 }

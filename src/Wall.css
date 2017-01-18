@@ -1,6 +1,5 @@
 .Wall{
   position: absolute;
-  border-top: 1px solid rgba(255,255,255,0.4);
   padding-top: 3px;
   font-size: 11px;
   font-family: monospace;
@@ -27,4 +26,16 @@
   line-height: 1.4em;
   overflow: hidden;
   margin: 0;
+  text-indent: 1.3em;
+}
+
+.Wall .pict{
+  display: block;
+  position: absolute;
+  background-color: #000;
+  border-radius: 0.5em;
+  width: 1em;
+  height: 1em;
+  left: 0;
+  top: 0.2em;
 }

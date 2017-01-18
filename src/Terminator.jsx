@@ -7,7 +7,7 @@ import * as d3 from 'd3-geo';
 
 export default function Terminator(props) {
   const {width, time, marge} = props;
-  const opacity = 0.12;
+  const opacity = 0.14;
 
   const solar = solarPosition(time);
   const [lng, lat] = antipode(solar);

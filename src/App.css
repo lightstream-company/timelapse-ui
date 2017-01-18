@@ -1,13 +1,13 @@
 /* position */
 .Clock{
   top: 1%;
-  left: 1%;
+  left: 2%;
 }
 
 .DigitDate{
   top: 1%;
-  left: 1%;
-  margin: 0 0 0 60px;
+  left: 2%;
+  margin: 3px 0 0 58px;
 }
 
 .Wall{
